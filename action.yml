@@ -14,8 +14,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v2
-    - uses: ./.github/actions/attempt-build
+    - uses: ${{ github.action_path }}/.github/actions/attempt-build
       if: ${{ inputs.attempt-build }}
     - run: ${{ github.action_path }}/fossa.sh
       env:
