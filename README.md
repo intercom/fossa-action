@@ -1,2 +1,2 @@
 # fossa-action
-Attempts to build the code of whatever repository this action is used in and then runs fossa to scan the repository for licensing issues.
+A GitHub action which runs fossa to scan for licensing issues, and sends the payload to the fossa-event-receiver in EMS.
