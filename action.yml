@@ -1,0 +1,17 @@
+name: 'FOSSA Action'
+description: 'Attempts to build code and then runs FOSSA to scan the repository for licensing issues.'
+inputs:
+  attempt-build:
+    description: 'Whether to attempt building code. Set this to false if manually adding build steps in the workflow.'
+    required: false
+    default: true
+runs:
+  using: "composite"
+  steps:
+    - uses: ./.github/actions/attempt-build
+      if: ${{ inputs.attempt-build }}
+    - run: ${{ github.action_path }}/fossa.sh
+      env:
+        FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
+        FOSSA_EVENT_RECEIVER_TOKEN: ${{ secrets.FOSSA_EVENT_RECEIVER_TOKEN }}
+      shell: bash
