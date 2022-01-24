@@ -5,6 +5,12 @@ inputs:
     description: 'Whether to attempt building code. Set this to false if manually adding build steps in the workflow.'
     required: false
     default: true
+  fossa-api-key:
+    description: 'API key for FOSSA.'
+    required: true
+  fossa-event-receiver-token:
+    description: 'Token for the FOSSA event receiver in EMS.'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -12,6 +18,6 @@ runs:
       if: ${{ inputs.attempt-build }}
     - run: ${{ github.action_path }}/fossa.sh
       env:
-        FOSSA_API_KEY: ${{ secrets.FOSSA_API_KEY }}
-        FOSSA_EVENT_RECEIVER_TOKEN: ${{ secrets.FOSSA_EVENT_RECEIVER_TOKEN }}
+        FOSSA_API_KEY: ${{ inputs.fossa-api-key }}
+        FOSSA_EVENT_RECEIVER_TOKEN: ${{ inputs.fossa-event-receiver-token }}
       shell: bash
