@@ -1,5 +1,5 @@
 name: 'FOSSA Action'
-description: 'Attempts to build code and then runs FOSSA to scan the repository for licensing issues.'
+description: 'A GitHub action which runs FOSSA to scan for licensing issues, and sends the payload to the fossa-event-receiver in EMS.'
 inputs:
   fossa-api-key:
     description: 'API key for FOSSA.'
@@ -7,6 +7,10 @@ inputs:
   fossa-event-receiver-token:
     description: 'Token for the FOSSA event receiver in EMS.'
     required: true
+  datadog-api-key:
+    description: 'DataDog API key to enable observability.'
+    required: false
+    default: ''
 runs:
   using: "composite"
   steps:
@@ -14,4 +18,5 @@ runs:
       env:
         FOSSA_API_KEY: ${{ inputs.fossa-api-key }}
         FOSSA_EVENT_RECEIVER_TOKEN: ${{ inputs.fossa-event-receiver-token }}
+        DATADOG_API_KEY: ${{ inputs.datadog-api-key }}
       shell: bash
