@@ -2,7 +2,7 @@ set +e
 curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install-latest.sh | bash -s -- -b ~/bin
 REPO_NAME=${GITHUB_REPOSITORY##*/}
 
-~/bin/fossa analyz --project $REPO_NAME
+~/bin/fossa analyze --project $REPO_NAME
 ANALYZE_EXIT_CODE=$?
 $GITHUB_ACTION_PATH/publish_dd_metric.sh fossa.analyze.exit_code $ANALYZE_EXIT_CODE $REPO_NAME
 if [ $ANALYZE_EXIT_CODE -ne 0 ]; then exit 1; fi
