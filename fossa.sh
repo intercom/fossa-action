@@ -17,7 +17,7 @@ TEST_END_TIME="$(date +%s)"
 TEST_TIME="$(expr $TEST_END_TIME - $TEST_START_TIME)"
 $GITHUB_ACTION_PATH/publish_dd_metric.sh fossa.test.time $TEST_TIME $REPO_NAME
 [ -z "$FOSSA_TEST" ] && FOSSA_TEST={}
-
+bla
 FOSSA_EMS_PAYLOAD="{\"repo_name\": \"$REPO_NAME\", \"fossa_issues\": $FOSSA_TEST}"
 N_ISSUES=`echo $FOSSA_EMS_PAYLOAD | jq -r '.fossa_issues.count'`
 $GITHUB_ACTION_PATH/publish_dd_metric.sh fossa.num_licensing_issues $N_ISSUES $REPO_NAME
