@@ -13,10 +13,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Attempt build
         uses: intercom/attempt-build-action@main
+        continue-on-error: true
       - name: Run FOSSA
         uses: intercom/fossa-action@main
         with:
           fossa-api-key: ${{ secrets.FOSSA_API_KEY }}
           fossa-event-receiver-token: ${{ secrets.FOSSA_EVENT_RECEIVER_TOKEN }}
           datadog-api-key: ${{ secrets.DATADOG_API_KEY }}
-
